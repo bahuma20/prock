@@ -32,7 +32,7 @@ window.onload = function () {
             break;
 
           case 'textarea':
-            value = value.replaceAll("\n", '<br>');
+            value = value.replace(/(?:\r\n|\r|\n)/g, '<br>');
             break;
         }
 
@@ -44,6 +44,6 @@ window.onload = function () {
 
       output += '</div>';
 
-      document.getElementById('form').innerHTML = output;
+      document.querySelector('#form').innerHTML = output;
     });
 };
