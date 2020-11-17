@@ -36,7 +36,10 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 
 // Add Basic authentication to our API.
-app.use(basicAuth( { authorizer: myAuthorizer } ))
+app.use(basicAuth( {
+  challenge: true,
+  authorizer: myAuthorizer
+}))
 
 function myAuthorizer(username, password) {
   const userMatches = basicAuth.safeCompare(username, BASIC_AUTH_USERNAME)
@@ -66,18 +69,20 @@ app.get('/api/get-submission/:form/:submission', async (req, res) => {
       submission,
     })
   } catch (e) {
-    res.sendStatus(400);
+    console.error(e);
+    res.status(400)
     res.json({
       status: 'error',
       message: e.toString(),
     });
+    return;
   }
 
 });
 
 app.post('/api/webhook', async (req, res) => {
   if (!dbIsConnected()) {
-    res.sendStatus(500);
+    res.status(500);
     res.json({
       status: 'error',
       message: 'Database not available',
@@ -116,7 +121,7 @@ app.post('/api/webhook', async (req, res) => {
   } catch (e) {
     console.error(e);
 
-    res.sendStatus(400);
+    res.status(400);
     res.json({
       status: 'error',
       message: e.toString(),
