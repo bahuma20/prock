@@ -1,5 +1,5 @@
 const express = require('express')
-const basicAuth = require('basic-auth');
+const basicAuth = require('express-basic-auth');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const app = express()
@@ -36,15 +36,14 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 
 // Add Basic authentication to our API.
-app.use((req, res, next) => {
-  const credentials = basicAuth(req);
+app.use(basicAuth( { authorizer: myAuthorizer } ))
 
-  if (!credentials || credentials.name !== BASIC_AUTH_USERNAME || credentials.pass !== BASIC_AUTH_PASSWORD) {
-    return res.status(401).json('Access denied');
-  }
+function myAuthorizer(username, password) {
+  const userMatches = basicAuth.safeCompare(username, BASIC_AUTH_USERNAME)
+  const passwordMatches = basicAuth.safeCompare(password, BASIC_AUTH_PASSWORD)
 
-  next();
-});
+  return userMatches & passwordMatches
+}
 
 
 app.use('/viewer/node_modules', express.static(__dirname + '/node_modules'));
