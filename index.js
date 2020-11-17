@@ -77,7 +77,7 @@ app.get('/api/get-submission/:form/:submission', async (req, res) => {
 });
 
 app.post('/api/webhook', async (req, res) => {
-  if (!database.isConnected()) {
+  if (!dbIsConnected()) {
     res.sendStatus(500);
     res.json({
       status: 'error',
@@ -161,3 +161,6 @@ mongoClient.connect((err) => {
   });
 });
 
+function dbIsConnected() {
+  return !!mongoClient && !!mongoClient.topology && mongoClient.topology.isConnected()
+}
