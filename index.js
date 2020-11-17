@@ -96,7 +96,7 @@ app.post('/api/webhook', async (req, res) => {
   // Download PDF file
   let backendUrl = `${BACKEND_SERVER_URL}/viewer?form=${formId}&submission=${submissionId}`;
 
-  let pdfUrl = `${PDF_SERVER_URL}/api/render?url=${encodeURIComponent(backendUrl)}&pdf.margin.top=2cm&pdf.margin.right=2cm&pdf.margin.bottom=2cm&pdf.margin.left=2cm`;
+  let pdfUrl = `${PDF_SERVER_URL}/api/render?url=${encodeURIComponent(backendUrl)}&authenticate.username=${BASIC_AUTH_USERNAME}&authenticate.password=${BASIC_AUTH_PASSWORD}&pdf.margin.top=2cm&pdf.margin.right=2cm&pdf.margin.bottom=2cm&pdf.margin.left=2cm`;
 
   let pdfBuffer = await request.get({uri: pdfUrl, encoding: null});
 

@@ -33,7 +33,7 @@ POST to `/api/webhook` with a body that contains at minimal:
 - BASIC_AUTH_USERNAME [admin]: Username that secures all urls
 - BASIC_AUTH_PASSWORD [admin]: Password that secures all urls
 - PDF_SERVER_URL [https://pdfserver.example.com]: The host of the server where url-to-pdf is running
-- BACKEND_SERVER_URL [http://admin:admin@prock:8080]: The host at which this app is accessible from the PDF server. Make sure to include basich auth credentials
+- BACKEND_SERVER_URL [http://prock:8080]: The host at which this app is accessible from the PDF server. Authentication is automatically added.
 - SFTP_HOST [my-server.example.com]
 - SFTP_PORT [22]
 - SFTP_USER [root]
