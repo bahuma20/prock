@@ -25,8 +25,6 @@ window.onload = function () {
         let label = item.label;
         let value = data.submission.data[item.key];
 
-console.log(item);
-console.log(value);
         switch (item.type) {
           case 'signature':
             value = `<img src="${value}">`;
