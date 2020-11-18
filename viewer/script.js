@@ -25,6 +25,8 @@ window.onload = function () {
         let label = item.label;
         let value = data.submission.data[item.key];
 
+console.log(item);
+console.log(value);
         switch (item.type) {
           case 'signature':
             value = `<img src="${value}">`;
@@ -34,6 +36,10 @@ window.onload = function () {
           case 'textarea':
             value = value.replace(/(?:\r\n|\r|\n)/g, '<br>');
             break;
+
+          case 'datetime':
+            let date = new Date(value);
+            value = date.getDay().toString().padStart(2, '0') + '.' + date.getMonth().toString().padStart(2, '0') + '.' + date.getFullYear() + ' ' + date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0') + ' Uhr';
         }
 
         return `<div class="component component--${item.type}">
