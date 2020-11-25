@@ -36,8 +36,10 @@ window.onload = function () {
             break;
 
           case 'datetime':
-            let date = new Date(value);
-            value = date.getDay().toString().padStart(2, '0') + '.' + date.getMonth().toString().padStart(2, '0') + '.' + date.getFullYear() + ' ' + date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0') + ' Uhr';
+            //console.log(item);
+            //let date = new Date(value);
+            //value = date.getDay().toString().padStart(2, '0') + '.' + date.getMonth().toString().padStart(2, '0') + '.' + date.getFullYear() + ' ' + date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0') + ' Uhr';
+            value = moment(value).tz("Europe/Berlin").format('DD.MM.yyyy HH:mm') + ' Uhr';
         }
 
         return `<div class="component component--${item.type}">

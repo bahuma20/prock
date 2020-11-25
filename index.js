@@ -8,6 +8,7 @@ const request = require("request-promise-native");
 const fs = require('fs');
 const SftpClient = require('ssh2-sftp-client');
 const sftp = new SftpClient();
+const moment = require('moment-timezone');
 
 
 const DB_URL = process.env.DB_URL;
@@ -93,6 +94,13 @@ app.post('/api/webhook', async (req, res) => {
   const formId = req.body.submission.form;
   const submissionId = req.body.submission._id;
 
+  let submissionCollection = database.collection('submissions');
+  const submission = await submissionCollection.findOne(ObjectId(submissionId));
+
+  let formCollection = database.collection('forms');
+  const form = await formCollection.findOne(ObjectId(formId));
+
+
   // Download PDF file
   let backendUrl = `${BACKEND_SERVER_URL}/viewer?form=${formId}&submission=${submissionId}`;
 
@@ -100,7 +108,7 @@ app.post('/api/webhook', async (req, res) => {
 
   let pdfBuffer = await request.get({uri: pdfUrl, encoding: null});
 
-  let filename = submissionId + '.pdf';
+  let filename = `${form.path}_${moment(submission.data.created).tz("Europe/Berlin").format('yyyy-MM-DD_HH-mm-ss')}.pdf`;
 
   fs.writeFileSync('./files/' + filename, pdfBuffer);
 
