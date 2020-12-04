@@ -116,6 +116,10 @@ app.post('/api/webhook', async (req, res) => {
   // Upload via FTP to somewhere
   // TODO: Set file name to submission creation time.
   try {
+    if (sftp.sftp) {
+      await sftp.end();
+    }
+
     await sftp.connect({
       host: SFTP_HOST,
       port: SFTP_PORT,
