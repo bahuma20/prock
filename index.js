@@ -100,6 +100,14 @@ const handleWebhook = async (req, res) => {
   let formCollection = database.collection('forms');
   const form = await formCollection.findOne(ObjectId(formId));
 
+  // Check if signed
+  if (form.tags.indexOf('signing') !== -1 && !submission.data.signed) {
+    res.json({
+      status: 'error',
+      message: 'Submission not yet signed, so no pdf generation.'
+    });
+    return;
+  }
 
   // Download PDF file
   let backendUrl = `${BACKEND_SERVER_URL}/viewer?form=${formId}&submission=${submissionId}`;
