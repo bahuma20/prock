@@ -81,7 +81,7 @@ app.get('/api/get-submission/:form/:submission', async (req, res) => {
 
 });
 
-app.post('/api/webhook', async (req, res) => {
+const handleWebhook = async (req, res) => {
   if (!dbIsConnected()) {
     res.status(500);
     res.json({
@@ -145,6 +145,18 @@ app.post('/api/webhook', async (req, res) => {
     status: 'success',
     message: 'uploaded as PDF to ftp server',
   });
+}
+
+app.post('/api/webhook', async (req, res) => {
+  return await handleWebhook(req, res);
+});
+
+app.put('/api/webhook', async (req, res) => {
+  return await handleWebhook(req, res);
+});
+
+app.patch('/api/webhook', async (req, res) => {
+  return await handleWebhook(req, res);
 });
 
 app.listen(PORT, HOST, () => {
