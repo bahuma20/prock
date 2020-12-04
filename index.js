@@ -82,6 +82,7 @@ app.get('/api/get-submission/:form/:submission', async (req, res) => {
 });
 
 const handleWebhook = async (req, res) => {
+  // Load data from mongodb
   if (!dbIsConnected()) {
     res.status(500);
     res.json({
@@ -100,6 +101,7 @@ const handleWebhook = async (req, res) => {
   let formCollection = database.collection('forms');
   const form = await formCollection.findOne(ObjectId(formId));
 
+
   // Check if signed
   if (form.tags.indexOf('signing') !== -1 && !submission.data.signed) {
     res.json({
@@ -108,6 +110,7 @@ const handleWebhook = async (req, res) => {
     });
     return;
   }
+
 
   // Download PDF file
   let backendUrl = `${BACKEND_SERVER_URL}/viewer?form=${formId}&submission=${submissionId}`;
@@ -121,8 +124,7 @@ const handleWebhook = async (req, res) => {
   fs.writeFileSync('./files/' + filename, pdfBuffer);
 
 
-  // Upload via FTP to somewhere
-  // TODO: Set file name to submission creation time.
+  // Upload via SFTP to storage
   try {
     if (sftp.sftp) {
       await sftp.end();
