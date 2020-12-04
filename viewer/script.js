@@ -18,7 +18,7 @@ window.onload = function () {
       ];
 
       output += data.form.components.map(item => {
-        if (hiddenComponents.indexOf(item.type) !== -1) {
+        if (hiddenComponents.indexOf(item.type) !== -1 || item.tags.indexOf('pdfHidden') !== -1) {
           return '';
         }
 
