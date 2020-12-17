@@ -31,8 +31,8 @@ const SFTP_DIRECTORY = process.env.SFTP_DIRECTORY;
 const mongoClient = new MongoClient(DB_URL);
 let database;
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true, limit: '100mb'}));
+app.use(bodyParser.json({limit: '100mb'}));
 app.use(methodOverride('X-HTTP-Method-Override'));
 
 
