@@ -4,8 +4,17 @@ body, html {
   font-family: sans-serif;
 }
 
+.header {
+  text-align: right;
+}
+
+.header img {
+  width: 500px;
+  display: inline-block;
+}
+
 .component {
-  margin-bottom: 1em;
+  margin-bottom: .5em;
 }
 
 .component__label {
@@ -14,6 +23,26 @@ body, html {
 }
 
 .component--signature img {
-  width: 400px;
+  width: 250px;
   height: auto;
+}
+
+.datagrid {
+  border: solid 1px gray;
+  border-collapse: collapse;
+}
+
+.datagrid td, th {
+  padding: 3px 10px;
+  border: solid 1px gray;
+  text-align: left;
+}
+
+
+.component.is-inline .component__label {
+  display: inline-block;
+}
+
+.component.is-inline .component__value {
+  display: inline-block;
 }

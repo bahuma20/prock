@@ -13,7 +13,7 @@ const moment = require('moment-timezone');
 
 const DB_URL = process.env.DB_URL;
 const DB_NAME = process.env.DB_NAME || 'formio';
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const HOST = '0.0.0.0';
 
 const BASIC_AUTH_USERNAME = process.env.BASIC_AUTH_USERNAME || 'admin';
