@@ -230,12 +230,11 @@ function formatDimensions(dimensions) {
   const allowedPunctuation = '+-*/()';
 
   allowedPunctuation.split('').forEach(item => {
-    // @ts-ignore
-    dimensions = dimensions.replaceAll(item, ' '+item+' ');
+    dimensions = dimensions.split(item).join(' '+item+' ');
   })
 
-  // @ts-ignore
-  dimensions = dimensions.replaceAll('  ', ' ');
+  dimensions = dimensions.split('  ').join(' ');
+  dimensions = dimensions.split('  ').join(' ');
 
   return dimensions;
 }
