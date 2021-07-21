@@ -46,3 +46,23 @@ body, html {
 .component.is-inline .component__value {
   display: inline-block;
 }
+
+.aufmass {
+  width: 100%;
+  border: solid 1px gray;
+  border-collapse: collapse;
+}
+
+.aufmass td, th {
+  padding: 3px 10px;
+  border: solid 1px gray;
+  text-align: center;
+}
+
+.aufmass .text-left {
+  text-align: left;
+}
+
+.aufmass .cell-dimensions {
+  width: 100%;
+}
