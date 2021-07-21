@@ -59,6 +59,10 @@ body, html {
   text-align: center;
 }
 
+.aufmass th {
+  font-size: 80%;
+}
+
 .aufmass .text-left {
   text-align: left;
 }
