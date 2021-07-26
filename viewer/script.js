@@ -162,10 +162,10 @@ function renderAufmass(value) {
 
       rows += `<tr>
         <td>${rowNr === 1 ? positionNr : ''}</td>
-        <td class="text-left">${row.label !== null && row.label !== '' ? row.label : ''}</td>
-        <td>${row.type === 'add' && row.count !== null && row.count !== 0 ? row.count : ''}</td>
-        <td>${row.type === 'subtract' && row.count !== null && row.count !== 0 ? row.count : ''}</td>
-        <td class="text-left cell-dimensions">${row.dimensions !== null && row.dimensions !== '' ? formatDimensions(row.dimensions) : ''}</td>
+        <td class="text-left">${row.label !== null && row.label !== undefined && row.label !== '' ? row.label : ''}</td>
+        <td>${row.type === 'add' && row.count !== null && row.count !== undefined && row.count !== 0 ? row.count : ''}</td>
+        <td>${row.type === 'subtract' && row.count !== null && row.count !== undefined && row.count !== 0 ? row.count : ''}</td>
+        <td class="text-left cell-dimensions">${row.dimensions !== null && row.dimensions !== undefined && row.dimensions !== '' ? formatDimensions(row.dimensions) : ''}</td>
         <td>${row.type === 'add' && rowResult !== null ? Math.abs(rowResult).toFixed(2) : ''}</td>
         <td>${row.type === 'subtract' && rowResult !== null ? Math.abs(rowResult).toFixed(2) : ''}</td>
         <td></td>
