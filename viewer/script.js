@@ -143,12 +143,18 @@ window.onload = function () {
 function renderAufmass(value) {
   console.log(value);
 
+  for (let i = 0; i < 4; i++) {
+    value.positions = value.positions.concat(value.positions);
+  }
+
   let rows = ``;
 
   let positionNr = 0;
   value.positions.forEach(position => {
     positionNr++;
     let positionResult = 0;
+
+    rows += '<tbody>';
 
     let rowNr = 0;
     position.rows.forEach(row => {
@@ -160,8 +166,14 @@ function renderAufmass(value) {
         positionResult = positionResult + rowResult;
       }
 
+      let posnrOutput = positionNr + '';
+
+      for (let i = posnrOutput.length; i < 3; i++) {
+        posnrOutput = '0' + posnrOutput;
+      }
+
       rows += `<tr>
-        <td>${rowNr === 1 ? positionNr : ''}</td>
+        <td>${rowNr === 1 ? posnrOutput : ''}</td>
         <td class="text-left">${row.label !== null && row.label !== undefined && row.label !== '' ? row.label : ''}</td>
         <td>${row.type === 'add' && row.count !== null && row.count !== undefined && row.count !== 0 ? row.count : ''}</td>
         <td>${row.type === 'subtract' && row.count !== null && row.count !== undefined && row.count !== 0 ? row.count : ''}</td>
@@ -192,7 +204,7 @@ function renderAufmass(value) {
       <td></td>
       <td></td>
       <td></td>
-    </tr>`;
+    </tr></tbody>`;
   });
 
   let output = `
@@ -212,9 +224,9 @@ function renderAufmass(value) {
         <th>-</th>
       </tr>
     </thead>
-    <tbody>
+<!--    <tbody>-->
       ${rows}
-    </tbody>
+<!--    </tbody>-->
   </table>
   `;
 
