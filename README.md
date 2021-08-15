@@ -28,8 +28,7 @@ POST to `/api/webhook` with a body that contains at minimal:
 ```
 
 ## Environment variables
-- DB_URL [mongodb://my-server.host.example.com:27017]: URL of the mongodb server
-- DB_NAME [formio]: The name of the database
+- DB_URL [mongodb://user:password@my-server.host.example.com:27017/dbname]: URL of the mongodb server
 - BASIC_AUTH_USERNAME [admin]: Username that secures all urls
 - BASIC_AUTH_PASSWORD [admin]: Password that secures all urls
 - PDF_SERVER_URL [https://pdfserver.example.com]: The host of the server where url-to-pdf is running
@@ -45,3 +44,7 @@ POST to `/api/webhook` with a body that contains at minimal:
 - `npm install`
 - `docker build .`
 - `docker run .` (don't forget to pass environment variables)
+
+
+## Import Leistungsverzeichnis
+See `tools/leistungsverzeichnis-import/README.md`.
